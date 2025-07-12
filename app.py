@@ -242,42 +242,42 @@ def index():
                             left_classifications[0] += 1
                         else:
                             right_classifications[0] += 1
-                    elif classification == "brilliant":
+                    elif classification == "great":
                         if side == "left":
                             left_classifications[1] += 1
                         else:
                             right_classifications[1] += 1
-                    elif classification == "great":
+                    elif classification == "best":
                         if side == "left":
                             left_classifications[2] += 1
                         else:
                             right_classifications[2] += 1
-                    elif classification == "best":
+                    elif classification == "excellent":
                         if side == "left":
                             left_classifications[3] += 1
                         else:
                             right_classifications[3] += 1
-                    elif classification == "excellent":
+                    elif classification == "good":
                         if side == "left":
                             left_classifications[4] += 1
                         else:
                             right_classifications[4] += 1
-                    elif classification == "good":
+                    elif classification == "book":
                         if side == "left":
                             left_classifications[5] += 1
                         else:
                             right_classifications[5] += 1
-                    elif classification == "book":
+                    elif classification == "inaccuracy":
                         if side == "left":
                             left_classifications[6] += 1
                         else:
                             right_classifications[6] += 1
-                    elif classification == "inaccuracy":
+                    elif classification == "mistake":
                         if side == "left":
                             left_classifications[7] += 1
                         else:
                             right_classifications[7] += 1
-                    elif classification == "mistake":
+                    elif classification == "miss":
                         if side == "left":
                             left_classifications[8] += 1
                         else:
