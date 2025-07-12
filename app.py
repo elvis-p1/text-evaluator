@@ -14,18 +14,21 @@ client = genai.Client(api_key=api_key)
 
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'webp'}
 
-# print(response.text)
-# chat_info: TextInfo = response.parsed[0]
-# for message in chat_info["messages"]:
-#     print(message["text"])
-
-# img_draw(chat_info)
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Returns
+"""
+img_draw generates the annotated image.
+
+Args:
+    image_file: FileStorage object with file data. Used to read into Google Gemini to generate analysis
+    file_name: String variable containing the file name of the image file 
+    
+Returns: 
+    None: if image is detected to not be a screenshot of a chat message exchange
+    chat_data: return ModelField object containing if file is a text message screenshot, a list of messages, opening name, text bubble colours, text colours, ELO rating values, and the background colour
+"""
 def img_draw(image_file, file_name):
     
     my_file = Image.open(image_file)
@@ -93,9 +96,7 @@ def img_draw(image_file, file_name):
         return None
     
     def wrap_text(text, font, max_width, draw):
-        """
-        Wraps text to fit within the max_width.
-        """
+        # Wraps text to fit within the max_width.
         words = text.split()
         lines = [] # Holds each line in the text box
         current_line = [] # Holds each word in the current line under evaluation.
@@ -287,6 +288,8 @@ def index():
                             left_classifications[9] += 1
                         else:
                             right_classifications[9] += 1
+                            
+                # Set ELO rating
                 left_elo = "-" 
                 right_elo = "-"
                 for elo in chat_data["elo_ratings"]:
