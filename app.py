@@ -149,7 +149,7 @@ def img_draw(image_file, file_name):
     size_x = 800
     size_y = my_file.size[1] 
     print(size_y)
-    img = Image.new(size=(size_x, size_y), mode='RGB', color=(255,255,255))
+    img = Image.new(size=(size_x, size_y), mode='RGB', color=chat_data["background_colour"])
     draw = ImageDraw.Draw(img)
     
     box_width = size_x // 2
