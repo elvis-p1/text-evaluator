@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title> Texting Theory Evaluator </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <h1>Upload new File</h1>
+        <div class="row">
+            <h2>Select a file to upload</h2>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages  %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }} </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </p>
+        </div>
+        <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+        </form>
+        {% if filename %}
+        <div style="padding:20px">
+            <img src="{{ url_for('display_image', filename=filename)}}">
+            <h2>{{ opening_name }}</h2>
+            <table>
+                <tr>
+                    <th>{{ left_colour }} ({{ left_elo }})</th>
+                    <th>Evaluation</th>
+                    <th>{{ right_colour }} ({{ right_elo }})</th>
+                </tr>
+                <tr>
+                    <td>{{ lefty[0] }}</td>
+                    <td>Brilliant</td>
+                    <td>{{ righty[0] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[1] }}</td>
+                    <td>Great</td>
+                    <td>{{ righty[1] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[2] }}</td>
+                    <td>Best</td>
+                    <td>{{ righty[2] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[3] }}</td>
+                    <td>Excellent</td>
+                    <td>{{ righty[3] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[4] }}</td>
+                    <td>Good</td>
+                    <td>{{ righty[4] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[5] }}</td>
+                    <td>Book</td>
+                    <td>{{ lefty[5] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[6] }}</td>
+                    <td>Innacuraccy</td>
+                    <td>{{ righty[6] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[7] }}</td>
+                    <td>Mistake</td>
+                    <td>{{ righty[7] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[8] }}</td>
+                    <td>Miss</td>
+                    <td>{{ righty[8] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ lefty[9] }}</td>
+                    <td>Blunder</td>
+                    <td>{{ righty[9] }}</td>
+                </tr>
+            </table> 
+        </div>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,84 @@
+Context: You are being given an image of a conversation over text chat. You are to "rate" or "classify" each chat message similarly to how chess.com rates chess.com (like how their evaluation system rates moves, good, great, inaccuracy, excellent, blunder, etc).
+Good moves tend to be moves that are clever, are genuine, and/or focus on building good rapport and would be more likely to make the other person want to date you. Bad moves tend to be cheap jokes, objectifying, lack genuine wit or are too inappropiate, or just probably not work in attracting the other person and not compel them to want to date you.
+
+
+Create a string that is a JSON object. Create the JSON object without any quotations or backticks (`) around it. Remember to have the property names of the JSON object be enclosed in double quotes. Create the object with the following keys:
+
+is_chat: Contains an integer "0" if the image given is a screenshot of a chat exchange. Otherwise if it isn't, put the value as integer "1". Typically these are characterized with having text bubbles on either side (left and right) of the screenshot signifying the exchange between the chat participants. There may also be emojis, images, a phone keyboard on the bottom, or other common phone UI elements in the image. Those are acceptable to pass as long as the image has text boxes on one or both sides, signifying the messages from the participating parties.
+
+messages: Contains the message the message details of every message sent
+by the users in the chat. Do not include system messages or emoji reacts (the tiny emoji underneath a message) as messages, ignore those. This json key will contain a list of objects, each containing:
+
+"side": what side the message was sent from (left or right). The side is determined by what side that text bubble is from in the image. NOTE THE EXCEPTIONS. Exceptions include if an image or big message is on the right but there is a message overlapping it below, then that image/big message is considered sent by the other side (left in this case), while the overlapping message box is considered sent from the right. If an image has a chat bubble overlapping it and is on the right side, consider the image sent by the "left" side while considering the text message beneath it a separate message that is sent by the opposite side (if the image is sent by the left, the message below is sent by the "right" because it is replying to the image sent by the other person). Value is a String. 
+
+"text": the text content or image content (describe images in square brackets). If the message is an image or photo, describe the image and put it in square brackets here, even if the photo or image/photo is partially off screen. For example, a picture of a tomato is put in the list of messages  object with the "text" attribute set as [picture of a tomato]. A photo of a woman would be put as [photo of a woman wearing a pink dress and high heels], for example. If a text bubble is partially overlapping an image/photo or overlapping a larger text message with bigger font and a bigger text bubble, like on the Hinge dating app, that means the text underneath is replying to that image/photo or big text. In that case, consider the image sent by the other side from the one sending the text message. So if the text bubble was on the right, the image/photo or big text bubble is considered sent by the person on left person and is considered a separate message object in the JSON, while the text was sent by the person on the right. Do not put in system messages like "You are now talking to <name>, or other messages not sent by either person. Replace newlines with spaces, instead of adding '\n' to the key. Reminder to not forget to put images or photos as 'messages' objects. Value is a String.
+
+"bubble_colour": the color of the text bubble in hex format (e.g. #FF0000). DO NOT FORGET TO PUT THE POUND SYMBOL (#) FOR THE HEX COLOUR CODE. If this cannot be determined (like for image messages that take up the whole bubble), make the bubble colour the same as whatever most of the other bubbles on the same side are. Value is a String.
+
+"text_colour": Set the text colour to what is seen in the image for that corresponding text colour
+
+"classification". What the classification of the message is. This is explained more below. Value is a String.
+
+Classification is explained below:
+
+A 'classification' corresponding to each individual text message in  ranging from Megablunders (bad) to Brilliant (very good) classify how effective the message was in a given context. Each message gets one classification. The classifications should take into account the context from preceding messages, if there are any. The classification system should be similar to how chess.com does their move classifications for chess moves. Put more weight into classifying a message as "book" if it is a standard opening message and it is the first message by a person. 
+
+A list of classifications is given below with what they each mean, go through all of them and pick one for each message that best fits it. Use previous messages as context for each one and do not give too many of the extreme ratings like "Brilliant" or "Megablunder" unless it is very justified. For example, if previous messages are playful, an sudden escalation could be appropiate and get a good classification. Do not be overly generous, it is okay to specify certain messages as inaccuracies, blunders, or megablunders if it fits. Do not give too many Brilliant, Excellent, Greats, etc unless it is justified (like the message would more likely result in a date). Messages that are too silly shouldn't get a very positive rating, unless it seems that it would be effective at attracting the other person. 
+
+Message Classifications: 
+
+Great - A "Great" move is one that is hard to find and stands out as being perfectly executed in that moment. It is the only, or one of the only good responses for the given situation.
+
+Best - An Excellent that is not quite as unorthodox and usually a bit stronger. The "Best" move is the most impactful, well-crafted message that not only ensures the conversation continues but elevates the connection to a new level. It's the type of message that demonstrates deep emotional intelligence, creativity, and timing. It’s not just a good response; it defines the conversation in a way that makes the other person think, “Wow, this person really gets me." It could be witty, deeply insightful, or surprisingly vulnerable, depending on the situation, but whatever it is, it resonates on a level that transcends the typical back-and-forth. It will have perfect timing, is memorable, emotionally resonant, has confidence without arrogance
+
+Excellent - A very above-average message. It matches the context of the conversation. The message shows genuine curiosity about the other person and their interests. It is open-ended and invites a meaningful reply. The message is very clever or unique, showing personality and creativity. The message reflects an understanding of the other person’s personality or profile details, showing effort in personalizing the conversation. If its close between a Good or Excellent, lean towards giving a message a "Good" classification.
+
+Good - An average/passing message. The tone is friendly but could be a bit more engaging or specific to the conversation. The message is decent but could stand out more. The message is somewhat personalized but could go a little deeper based on the other person’s profile or prior messages. It still takes the conversation in a good direction. If its close between a Good or Excellent, lean towards giving a message a "Good" classification.
+
+Inaccuracy - A weak message or misstep. The tone is either too harsh, distant, or flat, making the message feel awkward or off. The message is too generic or doesn’t show much interest in the other person. The message contains awkward phrasing or unclear wording that could confuse the other person. The message is sent too soon (without context) or with a delay that breaks the flow. The message feels dull or too typical (like a basic "Hey, how are you?" or cliché pickup line). The message feels generic, like a copy-paste message or just a bland question.
+
+Mistake - A message that has good intentions but still has some obvious flaws that may put off the other person, typically there are some areas that need work. While it is not disastrous, it is clear that something went wrong. It might be a little off-tone, irrelevant, misinterpreted, inappropriate, or non-sensical. This message is not immediately disastrous but puts the sender in a more disadvantageous position in attracting the other person.
+
+Miss - Not just bad, but also a missed opportunity. Failed to capitalize on an opportunity presented by the other person. Can be from missed engagement, stalling the conversation, failing to read the room, or missed the other person's humour. This could be unknowingly rejecting someone's advances and shutting them down.
+
+Blunder - A devastating mistake that's hard to come back from. The tone comes across as overly aggressive, rude, disinterested, or too inappropiate, which can turn the other person off. The message is a one-sided comment that doesn’t invite further interaction or is overly self-centered. The message is unintelligible, full of typos, or otherwise so unclear that it could lead to a bad misunderstanding. The message interrupts the conversation at an awkward moment or takes too long to respond. The message is overdone, cringe-worthy, or feels like it's trying too hard to be funny or clever. The message makes assumptions or generalizations that don’t fit the other person.
+
+Brilliant - An extremely clever message, often involves moving a conversation from going badly to going good, or from it going good to going extremely well. A hard-to-think-of message, yet spectacular response that goes far beyond the expected or the standard and is hard to find. Note, a brilliant move is not always possible. A brilliant should not be possible in the opening message. Give brilliant classifications out sparingly
+
+Special classifications:
+
+Book - A standard opening message. A "Book" message is a generic or basic opening message or response. Should only be given to the first message or possibly if the previous message was also classified a "Book" move (but only if it is a very generic response).
+
+Forced - This message had to be said or the conversation would take an even worse turn. Realistically the only message that could be said in this situation that makes sense.
+
+Result classifications (typically for the last message if it applies):
+
+Abandon - A player leaves abruptly.
+
+Checkmated - The person agrees to go on a date, meet up, or hook up, or gives their phone number.
+
+Draw - One or both player(s) settle. No definite result.
+
+Resign - A player gives up.
+
+Timeout - A player took too long to respond
+
+Winner - A post-victory message.
+
+Match each message to one of these classifications and put it in the value. Look at each classification and determine which one fits a given message the most. Do not give too many Brilliant, Excellent, Greats, etc unless it is justified. Messages that are too silly shouldn't get a very positive rating, depending on the context.
+
+Opening_name: Contains a chess-style opening name, but fitting for what was said in the opening of the given conversation between the person on the right and person on the left. Examples of chess opening names include "French Opening", "The Caro Kann Opening", "Hungarian Opening - Symmetrical Variation", "Sicilian Defense - Najdorf Variation", "Queen's Gambit Accepted", Polish Opening (Bugayev Attack), Grob Opening (Hurst Attack). If someone's opening messages are more bold or risky, make the name a gambit. If it is a gambit, put if its Accepted or Declined. Say if it is accepted or declined right after the name of the gambit. For example, Danish Gambit Accepted, Evans Gambit Declined. Also you may add a variation to the name that is related to what was said in the text. Be creative and humorous with the names. The a "gambit" is not responded to well, make it "Declined". Do not consider the first message for the opening name if it is a message being replied to. The value is a String.
+
+side_colours: Contains a list of lists, where each list contains the hex code representing for the colours of the majority of the text bubbles on each side, and the english name for the colour represented by that hexcode, (e.g. [["#FFFFFF", "White"], ["#A020F0", "Purple"]]). The first element represents the colour of the left side, the second element represents the right side. For example, in the case of the text boxes on the left side being mostly white and the boxes on the right side mostly being purple, the list contained here would be ["White", "Purple"]. If they are both the same shades of one colour, then give more detail to signify so in the colour name, like "["Light Red", "Dark Red"]. Get these colours from the "bubble_colour" attribute of the "messages" key, which is present in the same JSON object. The bubble_colour attribute values will be in hex code, so #FFFFFF will be White, #FFC0CB will be Pink, etc. If a side has two colours in the same number of text bubbles, choose the one that is less similar to the majority colour on the other side (for example, if there is a one dark purple and one light pink text bubble on the right, and the left side is white, then the dark purple is less similar to the left colour than the light pink so choose the dark purple as the side_colour for the right). If one side has no text messages, put an empty string for that side. (for example, if the left side has no text messages and the right side does with purple text bubbles, make the list value be [["#A020F0","Purple"], ["", ""]] if the RIGHT side has no text messages but the left side does have purple text bubbles. Vice versa, make it [["", ""], ["#A020F0","Purple"]] if there are no text bubbles on the left but there are purple text bubbles on the right. 
+
+side_text_colours: Contains a list of strings (should be 2 strings) where the first and second string value represent the text colour of most of the left text messages and right text messages respectively, as hex code. So if most of the left text messages are white coloured and most of the right text messages are black coloured, set the value to ["#FFFFFF", "#000000"]. If no text bubbles are detected for a side put an empty string (e.g. ["", "#FFFFFF] if no left side text bubbles are detected)
+
+ELO_Ratings: Contains a list with containing objects. The objects contain:
+
+"side": The side for which the following ELO rating belongs to
+"rating": The ELO_rating the messager received, based on the below description
+
+Give a chess style ELO rating for the people in the conversation (1 or 2 people). Use 600 ELO rating as a baseline for the'average' conversational skill, in the dating context, and 1000 and over for "higher skilled" conversations. In addition, the ELO rating estimation will be relative to how well they do in comparison to the other person. Use the classifications of the messages sent to determine how much ELO they get. Best, Brilliant, Excellent, Great, Good should contribute decreasing amounts of ELO and negative classifications like Inaccuracy, Miss, Mistake, Blunder, Megablunder should increasingly negatively affect the overall ELO rating of the person sending that too (e.g. inaccuracies shouldn't bring down the ELO rating as much as a Mistake, which should not bring it down as much as a Blunder). This should follow how chess.com estimate skill level played based on moves made during a chess match.
+
+Background_colour: Contains the colour of the background of the image as an RGB value. Value is a String.
+

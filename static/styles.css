@@ -1,0 +1,27 @@
+@font-face {
+    font-family: VerdanaBold;
+    src: url("./fonts/Verdana-Bold.ttf");
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url("./fonts/Verdana.ttf");
+}
+
+body { font-family: Verdana, Arial, sans-serif; }
+
+table {
+    table-layout: fixed;
+    width: 35%;
+}
+
+h1 {
+    font-family: VerdanaBold, Arial, sans-serif;
+}
+th {
+    text-align: left;
+}
+
+table, th{
+    border: 1px solid black;
+}
