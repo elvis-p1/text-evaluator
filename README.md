@@ -1,6 +1,6 @@
-###### Dating Text Evaluator ######
+# Dating Text Evaluator
 
-Analyze dating text screenshots, chess.com style! Uses Google Gemini.
+### Analyze dating text screenshots, chess.com style! Uses Google Gemini.
 
 ### Example Flow ###
 ## 1. Original Screenshot ##
