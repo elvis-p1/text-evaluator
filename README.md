@@ -10,3 +10,6 @@
 ## 3. Analysis Table ##
 Contains the count of each evaluation for each chatter, and their "ELO" rating, indicating how skillfully they messaged<br />
 ![alt text](https://github.com/elvis-p1/text-evaluator/blob/main/examples/ex3.png?raw=true "Analysis Table")
+
+#### 📁 Images you upload go to the static/uploads directory 
+###### Flask used for the frontend with HTML and CSS
